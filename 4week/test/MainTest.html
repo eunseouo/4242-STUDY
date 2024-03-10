@@ -14,14 +14,15 @@
       }
 
       .display {
-        /*display: flex;*/
-        width: 390px;
-        height: 40px;
-        text-align: right;
-        line-height: 40px;
+        display: flex;
+        flex-direction: row;
+        flex-basis: 30px;
+        justify-content: end;
+        line-height: 35px;
         margin: 5px;
         padding-right: 5px;
-        background-color: lightgray;
+        background-color: rgb(223, 222, 222);
+        border: 0.5px solid rgb(150, 153, 158);
       }
       .buttons {
         display: flex;
@@ -29,16 +30,18 @@
         flex: 1 1 0;
       }
       button {
-        width: 95px;
+        width: 90px;
         height: 30px;
         margin: 1px;
+        border: 0.5px solid rgb(150, 153, 158);
       }
       .zero {
-        flex: 2 1 0;
+        flex-basis: 190px;
         justify-content: space-evenly;
       }
-      .equals {
-        display: block;
+      .equal {
+        flex-direction: row;
+        flex-basis: 385px;
       }
     </style>
   </head>
