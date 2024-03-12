@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .selectBasic {
+        padding: 20px 30px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- onchange 랑 onclick 차이는? -->
+    <select class="selectBasic" onchange="select()">
+      <option value="케로로">케로로</option>
+      <option value="도로로">도로로</option>
+      <option value="타마마">타마마</option>
+    </select>
+    <script>
+      function select() {
+        var value1 = document.getElementsByClassName('selectBasic').value;
+
+        //console.log(value.option[value.selectedIndex].value);
+        if (value1 === '케로로') {
+          //console.log(value);
+          alert('중사입니다.');
+        } else if (value1 === '도로로') {
+          alert('병장입니다.');
+        } else {
+          alert('이등병입니다.');
+        }
+      }
+      //         let result ={};
+      // const keroro = document.getElementsByClassName('selectBasic');
+
+      // result.keroro = selectBasic.options[selectBasic.selectedIndex].value;
+    </script>
+  </body>
+</html>
