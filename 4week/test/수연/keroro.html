@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>keroro</title>
     <style>
-      #selectBasic {
+      .selectBasic {
         padding: 20px 30px;
         border-radius: 5px;
       }
     </style>
   </head>
   <body>
-    <!--class로 바꾸기만 하면 오류가 남...  -->
-    <select name="" id="selectBasic" onchange="showRankMessage()">
+    <select name="" class="selectBasic" onchange="showRankMessage()">
       <option value="케로로">케로로</option>
       <option value="도로로">도로로</option>
       <option value="타마마">타마마</option>
@@ -21,7 +20,7 @@
 
     <script>
       function showRankMessage() {
-        var selected = document.getElementById('selectBasic').value;
+        var selected = document.querySelector('.selectBasic').value;
 
         if (selected === '케로로') {
           alert('중사입니다.');
