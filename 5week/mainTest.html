@@ -88,8 +88,9 @@
       function result() {
         var expression = document.getElementById('display').innerHTML;
         Number(expression);
+        console.log(expression);
         //console.log(typeof Number(expression));
-        document.getElementById('display').value = expression;
+        document.getElementById('display').innerHTML = expression;
       }
       //=계산이 안돼..!!!
     </script>
