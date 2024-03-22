@@ -56,40 +56,56 @@
         <button onclick="number('9')">9</button>
         <button onclick="number('8')">8</button>
         <button onclick="number('7')">7</button>
-        <button onclick="number('+')">+</button>
+        <button onclick="operator('+')">+</button>
       </div>
       <div class="buttons">
         <button onclick="number('6')">6</button>
         <button onclick="number('5')">5</button>
         <button onclick="number('4')">4</button>
-        <button onclick="number('-')">-</button>
+        <button onclick="operator('-')">-</button>
       </div>
       <div class="buttons">
         <button onclick="number('3')">3</button>
         <button onclick="number('2')">2</button>
         <button onclick="number('1')">1</button>
-        <button onclick="number('*')">*</button>
+        <button onclick="operator('*')">*</button>
       </div>
       <div class="buttons">
         <button class="zero" onclick="number('0')">0</button>
         <button onclick="number('.')">.</button>
-        <button onclick="number('/')">/</button>
+        <button onclick="operator('/')">/</button>
       </div>
       <div class="buttons">
         <button class="equal" onclick="result()">=</button>
       </div>
     </div>
     <script>
-      function number(a) {
-        const num = document.getElementById('display');
-        num.innerHTML += a;
+      function number(n) {
+        const storage= document.querySelector('#display');
+        Number(storage);
+        //if를 통해 처음 숫자인지 두번째 숫자인지 판별
+        //그런데 storage 타입이 계속 object로 나와서 length를 알 수 없음. 
+        if(storage.length >= 3){
+          document.querySelector('#display') = '';
+          storage.innerHTML = n;
+          }
+        else{
+          storage.innerHTML += n;
+          console.log(typeof storage);
+        }
+      }
+
+      function operator(o) {
+        const storage = document.querySelector('#display');
+        storage.innerHTML += o;
+        console.log(typeof storage);
+
       }
 
       function result() {
         var expression = document.getElementById('display').innerHTML;
         Number(expression);
-        console.log(expression);
-        //console.log(typeof Number(expression));
+      //console.log(expression);
         document.getElementById('display').innerHTML = expression;
       }
       //=계산이 안돼..!!!
