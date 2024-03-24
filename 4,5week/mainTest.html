@@ -56,51 +56,71 @@
         <button onclick="number('9')">9</button>
         <button onclick="number('8')">8</button>
         <button onclick="number('7')">7</button>
-        <button onclick="operator('+')">+</button>
+        <button class="operator" onclick="operator('+')">+</button>
       </div>
       <div class="buttons">
         <button onclick="number('6')">6</button>
         <button onclick="number('5')">5</button>
         <button onclick="number('4')">4</button>
-        <button onclick="operator('-')">-</button>
+        <button class="operator" onclick="operator('-')">-</button>
       </div>
       <div class="buttons">
         <button onclick="number('3')">3</button>
         <button onclick="number('2')">2</button>
         <button onclick="number('1')">1</button>
-        <button onclick="operator('*')">*</button>
+        <button class="operator" onclick="operator('*')">*</button>
       </div>
       <div class="buttons">
         <button class="zero" onclick="number('0')">0</button>
         <button onclick="number('.')">.</button>
-        <button onclick="operator('/')">/</button>
+        <button class="operator" onclick="operator('/')">/</button>
       </div>
       <div class="buttons">
         <button class="equal" onclick="result()">=</button>
       </div>
     </div>
     <script>
+      let storage= document.querySelector('#display');
+      const num1 = document.querySelector('#display');
+      const num2 = document.querySelector('#display');
+      //const op = document.querySelector('#display');
+
       function number(n) {
-        const storage= document.querySelector('#display');
-        Number(storage);
         //if를 통해 처음 입력한 숫자인지 두 번째 숫자인지 판별
         //그런데 storage 타입이 계속 object로 나와서 length를 알 수 없음. 
-        if(storage.length >= 3){
-      //    document.querySelector('#display') = '';
-          //storage.value = '';
-          storage.innerHTML = n;
-          }
-        else{
+        if(num1 == ''){//첫번째 숫자
+          num1.innerHTML = n;
           storage.innerHTML += n;
-          console.log(typeof storage);
+          console.log(num1);
+          console.log("첫번째");
+          
+          }
+        else{ //두번째 숫자
+          num2.innerHTML = n;
+          num2.innerHTML = n;
+          console.log(num2);
+          console.log("두번째");
         }
       }
 
+    
+      
+      //연산자 함수
       function operator(o) {
-        const storage = document.querySelector('#display');
+        const op = o;
         storage.innerHTML += o;
-        console.log(typeof storage);
+        console.log(op);
+      }
 
+      //계산 함수
+      function result() {
+        const op = document.querySelector('.operator');
+        Number(num1,num2)
+        
+        //console.log(num1 + op + num2);
+        
+        
+      //  num1 = document.querySelector()
       }
 
 //      function result() {

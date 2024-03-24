@@ -57,13 +57,13 @@
     <script>
       // 문제1.사용자가 입력한 메모를 가져와서 저장을 하면 메모가 저장되었다는 경고창을 표시함.
       function saveMemo() {
-        const memo_str = document.getElementById('memo').value;
+        const memo_str = document.querySelector('#memo').value;
         alert('메모가 저장되었습니다.');
       }
 
       // 문제2. id가 memo인 입력 요소의 값을 빈 문자열로 설정하여 입력된 메모를 지웁니다.
       function clearMemo() {
-        document.getElementById('memo').value = '';
+        document.querySelector('#memo').value = '';
       }
     </script>
   </body>
