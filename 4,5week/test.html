@@ -56,24 +56,24 @@
         <button class="number" onclick="number('9')">9</button>
         <button class="number" onclick="number('8')">8</button>
         <button class="number" onclick="number('7')">7</button>
-        <button class="operator" onclick="plus('+')">+</button>
+        <button class="operator" onclick="operator('+')">+</button>
       </div>
       <div class="buttons">
         <button class="number" onclick="number('6')">6</button>
         <button class="number" onclick="number('5')">5</button>
         <button class="number" onclick="number('4')">4</button>
-        <button class="operator" onclick="minus('-')">-</button>
+        <button class="operator" onclick="operator('-')">-</button>
       </div>
       <div class="buttons">
         <button class="number" onclick="number('3')">3</button>
         <button class="number" onclick="number('2')">2</button>
         <button class="number" onclick="number('1')">1</button>
-        <button class="operator" onclick="muliply('*')">*</button>
+        <button class="operator" onclick="operator('*')">*</button>
       </div>
       <div class="buttons">
         <button class="zero" class="number" onclick="number('0')">0</button>
         <button onclick="number('.')">.</button>
-        <button class="operator" onclick="divide('/')">/</button>
+        <button class="operator" onclick="operator('/')">/</button>
       </div>
       <div class="buttons">
         <button class="equal" onclick="result()">=</button>
@@ -81,25 +81,44 @@
     </div>
     <script>
       //변수 생성
-      var num1 = document.querySelector('.number');
-      var num2 = document.querySelector('.number');
-      var op = '';
-      var display = document.querySelector('#display');
-      
+      var num1 = '';
+      var num2 = '';
+      const op = document.querySelector('.operator');
+      const result = document.querySelector('.equal');
+      const display = document.querySelector('#display');
+
+      const number = (n) => {
+        if(!op){
+          num1 += n.target.textContent;
+          display.value += n.target.textContent;
+          return;
+        }
+        if(!num2){
+          display.value = '';
+        }
+          num2 += n.target.textContent;
+          display.value += n.target.textContent;
+          return;
+      }
 
       function number(n) {
+        //console.log(op.length);
+        console.log(op);
+        console.log(num1,num2)
         if(!op){//첫번째 숫자
-          num1 = n;
-          display.innerHTML = n;
+          var num1 = n;
+          display.innerHTML += n;
           console.log("첫번째");
-          console.log(num1,op,num2)
+          console.log(num1);
+          console.log(num2);
           
           }
         else{ //두번째 숫자
-          num2 = n;
+          var num2 = n;
           display.innerHTML = n;
           console.log("두번째");
-          console.log(num1,op,num2)
+          console.log(num1);
+          console.log(num2);
         }
         
       }
@@ -107,42 +126,20 @@
     
       
       //연산자 함수
-      function plus(o) { 
-        op = o;
-        display.innerHTML = o;
-        console.log(op);
-      }
-      function minus(o) { 
-        op = o;
-        display.innerHTML = o;
-        console.log(op);
-      }
-      function muliply(o) { 
-        op = o;
-        display.innerHTML = o;
-        console.log(op);
-      }
-      function divide(o) { 
-        op = o;
-        display.innerHTML = o;
+      function operator(o) { 
+        var op = o;
+        display.innerHTML += o;
         console.log(op);
       }
       
 
       //계산 함수
       function result() {
-        if (op == '+'){
-          display.innerHTML = parseFloat(num1)+parseFloat(num2);
-        }
-        else if(op == '-'){
-          display.innerHTML = num1-num2;
-        }
-        else if(op == '*'){
-          display.innerHTML = num1*num2;
-        }
-        else{
-          display.innerHTML = num1/num2;
-        }
+        var resultValue = num1+op;
+        console.log(resultValue);
+        console.log(num1);
+
+        display.innerHTML = resultValue;
       }
     </script>
   </body>
