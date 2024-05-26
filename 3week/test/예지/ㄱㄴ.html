@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+    <style>
+        body {
+            font: bold;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        button{
+            background-color: forestgreen;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>다음 중 어떤 것이 ㄱ 일까요?</h1>
+    <button id="first" value=1 onclick="check(first)">ㄱ</button>
+    <button id="second" value=2 onclick="check(second)">ㄴ</button>
+    
+    <script> 
+        function check(answer){
+        if(answer === first){
+            alert("O");
+        }else if(answer === second){
+            alert("X");
+        }
+        }
+        
+    </script>
+    
+    
+</body>
+</html>

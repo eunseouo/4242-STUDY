@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>륜이 문제</title>
+  </head>
+  <body>
+    <script>
+      const student = {
+        name: 'eunseo',
+        age: 21,
+        scores: {
+          korean: 99,
+          math: 70,
+          english: 50,
+        },
+      };
+
+      const sub1 = student.scores.korean;
+      const sub2 = student.scores.math;
+      const sub3 = student.scores.english;
+
+      console.log(sub1 + sub2 + sub3);
+      console.log((sub1 + sub2 + sub3) / 3);
+    </script>
+  </body>
+</html>

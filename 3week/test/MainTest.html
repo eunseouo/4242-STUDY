@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .calculator {
+        display: flex;
+        width: 400px;
+        height: 230px;
+        flex-direction: column;
+        border: 1px solid black;
+      }
+
+      .display {
+        display: flex;
+        flex-direction: row;
+        flex-basis: 30px;
+        justify-content: end;
+        line-height: 35px;
+        margin: 5px;
+        padding-right: 5px;
+        background-color: rgb(223, 222, 222);
+        border: 0.5px solid rgb(150, 153, 158);
+      }
+      .buttons {
+        display: flex;
+        justify-content: space-evenly;
+        flex: 1 1 0;
+      }
+      button {
+        width: 90px;
+        height: 30px;
+        margin: 1px;
+        border: 0.5px solid rgb(150, 153, 158);
+      }
+      .zero {
+        flex-basis: 190px;
+        justify-content: space-evenly;
+      }
+      .equal {
+        flex-direction: row;
+        flex-basis: 385px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="display">0</div>
+      <div class="buttons">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>+</button>
+      </div>
+      <div class="buttons">
+        <button>6</button>
+        <button>5</button>
+        <button>4</button>
+        <button>-</button>
+      </div>
+      <div class="buttons">
+        <button>3</button>
+        <button>2</button>
+        <button>1</button>
+        <button>*</button>
+      </div>
+      <div class="buttons">
+        <button class="zero">0</button>
+        <button>.</button>
+        <button>/</button>
+      </div>
+      <div class="buttons">
+        <button class="equal">=</button>
+      </div>
+    </div>
+  </body>
+</html>

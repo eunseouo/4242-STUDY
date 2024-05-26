@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계산기 작동시키기</title>
+    <style>
+      .calculator {
+        display: flex;
+        width: 400px;
+        height: 230px;
+        flex-direction: column;
+        border: 1px solid black;
+      }
+
+      #display {
+        display: flex;
+        flex-direction: row;
+        flex-basis: 30px;
+        justify-content: end;
+        line-height: 35px;
+        margin: 5px;
+        padding-right: 5px;
+        background-color: rgb(223, 222, 222);
+        border: 0.5px solid rgb(150, 153, 158);
+      }
+      .buttons {
+        display: flex;
+        justify-content: space-evenly;
+        flex: 1 1 0;
+      }
+      button {
+        width: 90px;
+        height: 30px;
+        margin: 1px;
+        border: 0.5px solid rgb(150, 153, 158);
+      }
+      .zero {
+        flex-basis: 190px;
+        justify-content: space-evenly;
+      }
+      .equal {
+        flex-direction: row;
+        flex-basis: 385px;
+      }
+
+      [contenteditable]:empty:before {
+        content: attr(placeholder);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <div id="display" contenteditable placeholder="0"></div>
+      <div class="buttons">
+        <button class="number" onclick="number('9')">9</button>
+        <button class="number" onclick="number('8')">8</button>
+        <button class="number" onclick="number('7')">7</button>
+        <button class="operator" onclick="plus('+')">+</button>
+      </div>
+      <div class="buttons">
+        <button class="number" onclick="number('6')">6</button>
+        <button class="number" onclick="number('5')">5</button>
+        <button class="number" onclick="number('4')">4</button>
+        <button class="operator" onclick="minus('-')">-</button>
+      </div>
+      <div class="buttons">
+        <button class="number" onclick="number('3')">3</button>
+        <button class="number" onclick="number('2')">2</button>
+        <button class="number" onclick="number('1')">1</button>
+        <button class="operator" onclick="muliply('*')">*</button>
+      </div>
+      <div class="buttons">
+        <button class="zero" class="number" onclick="number('0')">0</button>
+        <button onclick="number('.')">.</button>
+        <button class="operator" onclick="divide('/')">/</button>
+      </div>
+      <div class="buttons">
+        <button class="equal" onclick="result()">=</button>
+      </div>
+    </div>
+    <script>
+      //변수 생성
+      var num1 = '';
+      var num2 = '';
+      var op = '';
+      var display = document.querySelector('#display');
+      
+
+      function number(n) {
+        if(!op){//첫번째 숫자    
+          num1 = n;      
+          display.innerHTML = n;
+          }
+        else{ //두번째 숫자
+          num2 = n;
+          display.innerHTML = n;
+        }
+        
+      }
+
+      //연산자 함수
+      function plus(o) { //더하기
+        op = o;                 //op변수에 매개변수 o 할당->데이터 저장
+        display.innerHTML = o;  //display에 o 띄우기->화면에 띄우기
+      }
+      function minus(o) {  //빼기
+        op = o;
+        display.innerHTML = o;
+      }
+      function muliply(o) {  //곱하기
+        op = o;
+        display.innerHTML = o;
+      }
+      function divide(o) { //나누기
+        op = o;
+        display.innerHTML = o;
+      }
+      
+
+      //결과 함수
+      function result() {
+        if (op == '+'){
+          display.innerHTML = parseFloat(num1)+parseFloat(num2);
+          //parseFloat를 통해 num1,2를 실수형태로 만들어줌
+        }
+        else if(op == '-'){
+          display.innerHTML = parseFloat(num1)-parseFloat(num2);
+        }
+        else if(op == '*'){
+          display.innerHTML = parseFloat(num1)*parseFloat(num2);
+        }
+        else{
+          display.innerHTML =parseFloat(num1)/parseFloat(num2);
+        }
+      }
+    </script>
+  </body>
+</html>

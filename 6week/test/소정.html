@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //두 수를 더하는 함수
+    function add(x, y){
+      return x+y;
+    }
+    //두 수를 제곱하는 함수
+    function square(num){
+      return num**2
+    }
+    //숫자 두 개의 합을 제곱하는 함수
+    function addsquare(x, y){
+      var plus = add(x,y);
+      var square2 = square(plus);
+      return square2;
+    }
+
+    //사용자한테 숫자 두 개 입력받기
+    let num1 = prompt('첫 번째 수를 입력하세요.');
+    let num2 = prompt('두 번째 수를 입력하세요.');
+    
+    //문자열을 숫자로 변환
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
+    
+    var result = addsquare(num1,num2);
+    //결과 출력
+    alert("두 숫자의 합의 제곱: " + result);
+  </script>
+  
+</body>
+</html>

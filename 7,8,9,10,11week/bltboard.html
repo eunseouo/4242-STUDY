@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>초간단 게시판</title>
+    <style>
+      h2 {
+        text-align: center;
+      }
+      
+      #inputDiv{
+        text-align: center;
+      }
+      #inputName {
+        width: 100px;
+        height: 40px;
+        border: 1px solid rgb(176, 176, 176);
+      }
+      #inputText {
+        width: 500px;
+        height: 40px;
+        border: 1px solid rgb(176, 176, 176);
+      }
+      button {
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+      }
+      table {
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+      }
+      .contentCell {
+        text-align: left;
+      }
+      p {
+        margin: 5px 5px;
+      }
+      
+      
+      #funcDiv{
+        margin-top: 20px;
+      }
+      #clear {
+        width: 200px;
+        height: 30px;
+        float: right;
+        margin-right: 200px;
+      }
+      #open_file {
+        width: 200px;
+        height: 30px;
+        float: right;
+        margin-right: 30px;
+      }
+      #save {
+        width: 200px;
+        height: 30px;
+        float: right;
+        margin-right: 30px;
+      }
+      
+      #searchDiv{
+        margin: 20px 0 20px 160px;
+      }
+      #searchInput{
+        width: 300px; height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>초간단게시판</h2>
+    <div id="inputDiv">
+      <input id="inputName" type="text"
+        onkeypress="if(event.key == 'Enter')document.querySelector('#inputText').focus()"/>
+      <input id="inputText" type="text"
+        onkeypress="if(event.key == 'Enter')document.querySelector('#button').focus();"/>
+      <button id="writeBtn" type="button"
+        >글작성</button>
+    </div>
+
+    <div id="funcDiv">
+      <button id="clear">게시판 비우기</button>
+      <button id="save">저장하기</button>
+      <button for="fileBtn" class="function-btn" id="open_file">불러오기</button>
+      <input type="file" id="fileBtn" style="display: none" accept=".json" title="Select JSON File"/>
+    </div>  
+<br>
+    <div id="searchDiv">
+      <input type="text" id="searchInput" placeholder="검색어를 입력해주세요" />
+      <button id="searchBtn">검색</button>
+      <button id="searchStop">검색해제</button>
+    </div>
+    
+    <div id="tableDiv">
+      <table id="board" border="1px">
+        <tr>
+          <th width="50px">번호</th>
+          <th width="100px">작성자</th>
+          <th width="500px">내용</th>
+          <th width="200px">작성일</th>
+          <th width="200px">기능</th>
+        </tr>
+      </table>
+    </div>
+    <script>
+      // 배열 생성
+      var list = [];
+
+      // ⭐글 작성 
+      function writeFunc(){
+        var name = document.querySelector('#inputName').value; // 입력받은 이름을 변수에 저장
+        var text = document.querySelector('#inputText').value; // 입력받은 내용을 변수에 저장
+        var time = new Date().toLocaleString(); // date 객체를 이용하여 시간을 문자열로 저장
+
+          // 객체 리터럴 생성
+          const newList = {
+            lName: name,
+            lText: text,
+            lTime: time,
+          };
+
+          // 배열에 객체 추가
+          list.push(newList);
+
+          const table = document.querySelector('#board');
+          const newRow = table.insertRow(); // 새로운 행 추가
+
+          //insertCell() 함수로 새로운 행에 셀 추가
+          var indexCell = newRow.insertCell(0);
+          var nameCell = newRow.insertCell(1);
+          var contentCell = newRow.insertCell(2);
+          var timeCell = newRow.insertCell(3);
+          var funcCell = newRow.insertCell(4);
+
+          // 셀에 값 추가
+          indexCell.innerText = list.length;
+          nameCell.innerText = newList.lName;
+          contentCell.innerText = newList.lText
+          contentCell.setAttribute('class', 'contentCell');
+          timeCell.innerText = newList.lTime;
+          funcCell.innerText = '';
+
+          // 삭제 버튼 추가
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = '삭제';
+          funcCell.appendChild(deleteButton);
+          // 삭제 버튼에 클릭 이벤트 추가
+          deleteButton.addEventListener('click', function() {
+          deleteFunc(newRow);
+          });
+
+          //댓글 버튼 추가
+          const commentButton = document.createElement('button');
+          commentButton.textContent = '댓글';
+          funcCell.appendChild(commentButton); // 버튼 추가
+          // 댓글 클릭이벤트 추가
+          commentButton.addEventListener('click', function(){
+            commentFunc(newRow);
+          });
+          document.querySelector('#inputName').value = '';
+          document.querySelector('#inputText').value = '';
+      }
+          document.querySelector('#writeBtn').addEventListener('click', function() {
+              writeFunc();
+          });
+          
+
+          //⭐삭제함수
+          function deleteFunc(row){
+            const deleteCheck = confirm('정말 삭제하시겠습니까?');
+            if (deleteCheck == true) {
+              //확인 클릭시
+              const rowIndex = row.rowIndex; //rowIndex속성 제공
+              list.splice(rowIndex - 1, 1); // 배열에서 해당 인덱스의 요소 삭제
+              row.parentNode.removeChild(row); // 해당 행 삭제
+              // 번호 업데이트
+              indexUpdate();
+            } else {
+            //취소 클릭시
+            return;
+            }
+          }
+          
+          //⭐인덱스 업데이트 함수
+          function indexUpdate(){
+            const table = document.querySelector('#board');
+            const rows = table.rows; //table.rows 를 통해 rows collection 을 가져올 수 있음
+              for (let i = 1; i < rows.length; i++) {
+                rows[i].cells[0].innerText = i; //삭제행을 제외한 행.인덱스 번호.
+              }
+          }
+
+          // ⭐댓글 함수
+          function commentFunc(row){
+            const comment = prompt('댓글을 입력하세요');
+            if (comment != null) {
+              const commentElmt = document.createElement('p');
+              commentElmt.textContent = `ㄴ ${comment} ( ${new Date().toLocaleString()} )`;
+              row.cells[2].appendChild(commentElmt);
+            } else {
+              return;
+            }
+          }
+
+      
+          //⭐저장하기
+          document.getElementById('save').addEventListener('click', function saveFile() {
+              if (list.length == 0) {
+                alert('저장할 데이터가 없습니다.');
+                return;
+              }
+              var element = document.createElement('a');
+              var jsonString = JSON.stringify(list, null, 4);
+              element.setAttribute('href','data:text/plain;charset=utf-8,' + encodeURIComponent(jsonString)
+              );
+              element.setAttribute('download', '게시판데이터.json'); // 다운로드할 파일 이름 지정
+              element.style.display = 'none';
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+            });
+
+          //⭐불러오기-코드 중복 해결하기
+          const label = document.getElementById('open_file');
+          const fileInput = document.getElementById('fileBtn');
+          label.addEventListener('click', function (e) {
+            e.preventDefault();
+            fileInput.click();
+          });
+          fileInput.addEventListener('change', function (e) { 
+            const file = e.target.files[0];
+            const fr = new FileReader();
+            fr.onload = () => {
+              var fileContent = fr.result;
+              var jsonObj = JSON.parse(fileContent);
+              // 읽은 데이터는 jsonObj에 있음. 이것을 활용하여
+              // 게시판을 다시 refresh
+              refreshBoard(jsonObj);
+            };
+            fr.readAsText(file);
+          });
+
+          function refreshBoard(data) {
+            for (let i = 0; i < data.length; i++) {
+              //const newItem = list[i];
+              var table = document.querySelector('#board');
+              var newRow = table.insertRow(); // 새로운 행 추가
+
+              // insertCell() 함수로 새로운 행에 셀 추가
+              var indexCell = newRow.insertCell(0);
+              var nameCell = newRow.insertCell(1);
+              var contentCell = newRow.insertCell(2);
+              var timeCell = newRow.insertCell(3);
+              var funcCell = newRow.insertCell(4);
+
+              // 셀에 값 추가
+              indexCell.innerText = i + 1; // 번호는 인덱스 + 1로 설정
+              nameCell.innerText = data[i].lName;
+              contentCell.innerText = data[i].lText;
+              contentCell.setAttribute('class', 'contentCell');
+              timeCell.innerText = data[i].lTime;
+              funcCell.innerText = '';
+
+              // 삭제 버튼 추가
+              const deleteButton = document.createElement('button');
+              deleteButton.textContent = '삭제';
+              funcCell.appendChild(deleteButton);
+              // 삭제 버튼에 클릭 이벤트 추가
+              deleteButton.addEventListener('click', function() {
+                deleteFunc(newRow);
+              });
+
+              // 댓글 버튼 추가
+              const commentButton = document.createElement('button');
+              commentButton.textContent = '댓글';
+              funcCell.appendChild(commentButton);
+              // 댓글 버튼에 클릭 이벤트 추가
+              commentButton.addEventListener('click', function() {
+                commentFunc(newRow);
+              });
+            }
+            document.querySelector('#inputName').value = '';
+            document.querySelector('#inputText').value = '';
+          }
+
+          //⭐전체 지우기
+          function clear() {
+          var table = document.getElementById('board'); // 테이블 요소 가져오기
+          var rowCount = table.rows.length; // 테이블의 행 개수 가져오기
+          // 테이블의 행을 역순으로 반복하면서 삭제
+          for (var i = rowCount - 1; i > 0; i--) {
+            table.deleteRow(i); // 행 삭제
+          }
+          // 인덱스 번호 업데이트
+          indexUpdate();
+          // list 배열 비우기
+          list = [];
+        }
+
+          // 클릭 이벤트 추가
+          document.querySelector('#clear').addEventListener('click', function () {
+              clear(); // 모든 행 삭제 함수 호출
+            });
+        
+          //⭐검색
+          document.getElementById('searchBtn').addEventListener('click', function() {
+            var keyword = document.querySelector('#searchInput').value.trim().toLowerCase(); // 입력된 검색어를 소문자로 변환하여 저장
+            var rows = document.querySelectorAll('#board tr'); // 모든 행을 가져옴
+
+            rows.forEach(function(row, index) {
+              if (index === 0) {
+                row.style.display = ''; // 첫 번째 행은 항상 보여줌
+              } else {
+                var content = row.cells[2].textContent.trim().toLowerCase(); // 해당 행의 내용을 가져와 소문자로 변환하여 저장
+                if (content.includes(keyword)) {
+                  row.style.display = ''; // 검색어가 내용에 포함되면 해당 행을 보여줌
+                } else {
+                  row.style.display = 'none'; // 검색어가 내용에 포함되지 않으면 해당 행을 숨김
+                }
+              }
+            });
+            indexUpdate(); // 검색 후에도 인덱스 업데이트
+            document.querySelector('#searchInput').value = '';
+          });
+
+        
+          //검색 해제
+          document.getElementById('searchStop').addEventListener('click', function() {
+            var rows = document.querySelectorAll('#board tr'); // 모든 행을 가져옴
+
+            rows.forEach(function(row, index) {
+              if (index === 0) {
+                row.style.display = ''; // 첫 번째 행은 항상 보여줌
+              } else {
+                row.style.display = ''; // 모든 행을 보여줌
+              }w
+            });
+            document.querySelector('#searchInput').value = ''; // 검색어 입력란 비우기
+          })
+
+    </script>
+  </body>
+</html>

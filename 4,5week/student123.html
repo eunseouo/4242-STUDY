@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예지 문제</title>
+  </head>
+  <body>
+    <div id="studentInfo"></div>
+
+    <script>
+      const students = [
+        {
+          이름: '전예지',
+          나이: 21,
+          정보: {
+            키: 167,
+            시력: -4.5,
+          },
+          좋아하는활동: ['영화시청', '쇼핑'],
+          성별: '여성',
+        },
+        {
+          이름: '장철수',
+          나이: 24,
+          정보: {
+            키: 180,
+            시력: 0.5,
+          },
+          좋아하는활동: ['축구', '댄스'],
+          성별: '남성',
+        },
+        {
+          이름: '김지민',
+          나이: 18,
+          정보: {
+            키: 159,
+            시력: -2.5,
+          },
+          좋아하는활동: ['미술', '독서'],
+          성별: '여성',
+        },
+      ];
+
+      let studentInfoContainer = document.querySelector('#studentInfo');
+      
+      //for 문을 사용하여 students의 프로퍼티를 도출해줌
+      for (let i = 0; i < students.length; i++){
+        //학생1,2,3 도출해주는 코드
+      let studentnum = document.createElement('h2');
+      document.body.appendChild(studentnum);
+      studentnum.innerHTML = "학생" + [i+1];
+
+      document.write("이름: " + students[i].이름 + '</br>');
+      document.write("나이: " + students[i].나이 + '</br>');
+      document.write("성별: " + students[i].성별 + '</br>');
+      document.write("키 정보: " + students[i].정보.키 + '</br>');
+      document.write("시력 정보: " + students[i].정보.시력 + '</br>');
+      document.write("좋아하는 활동: " + students[i].좋아하는활동 + '</br>');
+      document.write("<hr>");
+      };
+      
+      </script>
+  </body>
+</html>

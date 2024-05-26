@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계절 맞추기</title>
+    <style>
+      body {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      #inputMonth {
+        width: 40px;
+        height: 20px;
+      }
+      #result {
+        width: 100px;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>몇 월인지 입력해주세요.</h3>
+    <input type="number" id="inputMonth" /> 월의 계절은? <br />
+    <br />
+    <button onclick="check()">확인하기</button>
+  </body>
+  <script>
+    function check() {
+      let month = document.getElementById('inputMonth').value;
+
+      if (month >= 3 && month <= 5) {
+        alert('봄입니다');
+        document.body.style.backgroundColor = '#fbe4eb';
+      } else if (month >= 6 && month <= 8) {
+        alert('여름입니다');
+        document.body.style.backgroundColor = '#dbead5';
+      } else if (month >= 9 && month <= 11) {
+        alert('가을입니다');
+        document.body.style.backgroundColor = '#ffead8';
+      } else if (month == 12 || month <= 2) {
+        alert('겨울입니다');
+        document.body.style.backgroundColor = '#e6f4fa';
+      } else {
+        alert('올바른 월을 입력하세요.(1~12)');
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="plus()">+</button>
+    <button onclick="minus()">-</button>
+    <button onclick="multiply()">*</button>
+    <button onclick="divide()">/</button>
+    <button onclick="nameoji()">%</button>
+    <script>
+      //원본대로 하려고 했으나 실패...
+      //덧셈 함수
+      function plus() {
+        var one = prompt('첫 번째 숫자를 입력하세요:');
+        var two = prompt('두 번째 숫자를 입력하세요:');
+
+        var num1 = Number(one);
+        var num2 = Number(two);
+
+        var result = num1 + num2;
+        alert('덧셈 결과: ' + result);
+      }
+      //뺄셈 함수
+      function minus() {
+        var one = prompt('첫 번째 숫자를 입력하세요:');
+        var two = prompt('두 번째 숫자를 입력하세요:');
+
+        var num1 = Number(one);
+        var num2 = Number(two);
+
+        var result = num1 - num2;
+        alert('뺄셈 결과: ' + result);
+      }
+      //곱셈 함수
+      function multiply() {
+        var one = prompt('첫 번째 숫자를 입력하세요:');
+        var two = prompt('두 번째 숫자를 입력하세요:');
+
+        var num1 = Number(one);
+        var num2 = Number(two);
+
+        var result = num1 * num2;
+        alert('곱셈 결과: ' + result);
+      }
+      //나눗셈 함수
+      function divide() {
+        var one = prompt('첫 번째 숫자를 입력하세요:');
+        var two = prompt('두 번째 숫자를 입력하세요:');
+
+        var num1 = Number(one);
+        var num2 = Number(two);
+
+        var result = num1 / num2;
+        alert('나눗셈 결과: ' + result);
+      }
+      //나머지?구하는 함수
+      function nameoji() {
+        var one = prompt('첫 번째 숫자를 입력하세요:');
+        var two = prompt('두 번째 숫자를 입력하세요:');
+
+        var num1 = Number(one);
+        var num2 = Number(two);
+
+        var result = num1 % num2;
+        alert('나머지 결과: ' + result);
+      }
+    </script>
+  </body>
+</html>
