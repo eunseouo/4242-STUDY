@@ -1,0 +1,16 @@
+function solution(array, commands) {
+    let answer = [];
+
+    for (let i = 0; i < commands.length; i++) {
+        let iNum= commands[i][0] - 1; 
+        let jNum = commands[i][1];
+        let kNum = commands[i][2] - 1; 
+
+        let newArray = array.slice(iNum, jNum);
+        newArray.sort((a, b) => a - b);
+        
+        answer.push(newArray[kNum]);
+    }
+    
+    return answer;
+}
