@@ -1,0 +1,11 @@
+function solution(phone_number) {
+    let starNum = phone_number.length - 4; 
+    let stars = "";  
+
+    for (let i = 0; i < starNum; i++) {
+        stars += "*";
+    }
+
+    let answer = stars + phone_number.slice(starNum);
+    return answer;
+}
