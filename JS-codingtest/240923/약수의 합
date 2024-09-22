@@ -1,0 +1,14 @@
+function solution(n) {
+    let array = [];
+    for (let i = 1; i <= n; i++) {
+        if (n % i == 0) {
+            array.push(i);
+        }
+    }
+    let sum = 0;  
+    let value;
+    for (value of array) {
+        sum = sum+ value;  
+    }
+    return sum;
+}
